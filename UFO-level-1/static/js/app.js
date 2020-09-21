@@ -11,7 +11,7 @@ table.attr('class', 'table-striped')
 var tbody = d3.select('tbody');
 
 
-//add cities to their own column
+//add data to table, code dynamically so it can update as data.js updates.
 for(let i = 0; i < tableData.length; i++){
     var row = tbody.append('tr');
     var cell = row.append('td');
@@ -30,4 +30,27 @@ for(let i = 0; i < tableData.length; i++){
     cellComments.text(tableData[i].comments);
 }
 
+//select form itself--defined in the html
+var form = d3.select("#form");
+//Select button that submits form-defined in the HTML
+var button = d3.select("#filter-btn");
 
+//Create event handlers so Javascript knows what to do when button is 
+//clicked/form is submitted 
+button.on("click", runEnter);
+form.on("submit", runEnter);
+
+//define form submission function--e.g. what to do when form is submitted
+function runEnter(){
+    //prevent page from refreshing
+    d3.event.preventDefault();
+    //select input element, get raw html node
+    var inputElement = d3.select("#form-control");
+    //grab value of input
+    var inputValue = inputElement.property("value");
+    //attempt to filter display table by input date
+    var filtered = table.filter(entry => entry.datetime === inputValue);
+    //check work, consolelog input value
+    console.log(inputValue)
+    console.log(filtered)
+}
