@@ -53,9 +53,9 @@ function runEnter(){
     console.log(inputElement)
     console.log(filtered)
     var table = d3.select('table');
-    table.remove()
-    var table = d3.select('table');
-    var tbody = d3.select('tbody');
+    //take out old data
+    tbody.html("");
+    //try to repopulate new data--but this doesn't work 
     for(let i = 0; i < filtered.length; i++){
         var row = tbody.append('tr');
         var cell = row.append('td');
@@ -73,8 +73,8 @@ function runEnter(){
         cellDuration.text(filtered[i].durationMinutes);
         cellComments.text(filtered[i].comments);
     };
-    
 }
+
 
 
 
