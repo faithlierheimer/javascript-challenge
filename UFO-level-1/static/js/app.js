@@ -53,7 +53,8 @@ function runEnter(){
     console.log(inputElement)
     console.log(filtered)
     var table = d3.select('table');
-//select table body in order to append new rows
+    table.remove()
+    var table = d3.select('table');
     var tbody = d3.select('tbody');
     for(let i = 0; i < filtered.length; i++){
         var row = tbody.append('tr');
@@ -71,6 +72,9 @@ function runEnter(){
         cellShape.text(filtered[i].shape);
         cellDuration.text(filtered[i].durationMinutes);
         cellComments.text(filtered[i].comments);
-    }
+    };
+    
 }
+
+
 
