@@ -55,7 +55,7 @@ function runEnter(){
     var table = d3.select('table');
     //take out old data
     tbody.html("");
-    //try to repopulate new data--but this doesn't work 
+    //repopulate new data based on filtering
     for(let i = 0; i < filtered.length; i++){
         var row = tbody.append('tr');
         var cell = row.append('td');
