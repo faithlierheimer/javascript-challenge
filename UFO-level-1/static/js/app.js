@@ -4,7 +4,6 @@ var tableData = data;
 //select table element
 var table = d3.select('table');
 //stripe the table using bootstrap for readability
-
 table.attr('class', 'table-striped')
 
 //select table body in order to append new rows
@@ -12,23 +11,30 @@ var tbody = d3.select('tbody');
 
 
 //add data to table, code dynamically so it can update as data.js updates.
-for(let i = 0; i < tableData.length; i++){
-    var row = tbody.append('tr');
-    var cell = row.append('td');
-    var cellCity = row.append('td');
-    var cellState = row.append('td');
-    var cellCountry = row.append('td');
-    var cellShape = row.append('td');
-    var cellDuration = row.append('td');
-    var cellComments = row.append('td');
-    cell.text(tableData[i].datetime); 
-    cellCity.text(tableData[i].city);
-    cellState.text(tableData[i].state);
-    cellCountry.text(tableData[i].country);
-    cellShape.text(tableData[i].shape);
-    cellDuration.text(tableData[i].durationMinutes);
-    cellComments.text(tableData[i].comments);
-}
+//write function to generalize the process?
+function buildTable(dataTable){
+    for(let i = 0; i < dataTable.length; i++){
+        var row = tbody.append('tr');
+        var cellDate = row.append('td');
+        var cellCity = row.append('td');
+        var cellState = row.append('td');
+        var cellCountry = row.append('td');
+        var cellShape = row.append('td');
+        var cellDuration = row.append('td');
+        var cellComments = row.append('td');
+        cellDate.text(dataTable[i].datetime); 
+        cellCity.text(dataTable[i].city);
+        cellState.text(dataTable[i].state);
+        cellCountry.text(dataTable[i].country);
+        cellShape.text(dataTable[i].shape);
+        cellDuration.text(dataTable[i].durationMinutes);
+        cellComments.text(dataTable[i].comments);
+    };
+    
+};
+
+//call function to build table
+buildTable(tableData);
 
 //select form itself--defined in the html
 var form = d3.select('form');
@@ -52,27 +58,10 @@ function runEnter(){
     //check work, consolelog input value
     console.log(inputElement)
     console.log(filtered)
-    var table = d3.select('table');
     //take out old data
     tbody.html("");
-    //repopulate new data based on filtering
-    for(let i = 0; i < filtered.length; i++){
-        var row = tbody.append('tr');
-        var cell = row.append('td');
-        var cellCity = row.append('td');
-        var cellState = row.append('td');
-        var cellCountry = row.append('td');
-        var cellShape = row.append('td');
-        var cellDuration = row.append('td');
-        var cellComments = row.append('td');
-        cell.text(filtered[i].datetime); 
-        cellCity.text(filtered[i].city);
-        cellState.text(filtered[i].state);
-        cellCountry.text(filtered[i].country);
-        cellShape.text(filtered[i].shape);
-        cellDuration.text(filtered[i].durationMinutes);
-        cellComments.text(filtered[i].comments);
-    };
+    //call build table function for filtered table
+    buildTable(filtered);
 }
 
 
